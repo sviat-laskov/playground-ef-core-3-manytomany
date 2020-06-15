@@ -1,0 +1,16 @@
+version: "3.4"
+
+services:
+  api:
+    image: ${DOCKER_REGISTRY-}api
+    build:
+      context: .
+      dockerfile: API/Dockerfile
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres
+    restart: always
+  adminer:
+    image: adminer
+    restart: always

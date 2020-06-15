@@ -1,0 +1,23 @@
+version: "3.4"
+
+services:
+  api:
+    env_file:
+      - ./API/Properties/db.env
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+    ports:
+      - "80"
+      - "443"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+  postgres:
+    env_file:
+      - ./API/Properties/db.env
+    ports:
+      - 5432:5432
+  adminer:
+    ports:
+      - 8080:8080
